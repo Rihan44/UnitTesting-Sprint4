@@ -551,7 +551,103 @@ expect(availableRooms).toEqual([room_1, room_2]);
 })
 
 describe('Bookings tests', () => {
-  test('fee test debe devolver la tarifa siendo distinta a 0', () => {
+  test('fee test debe devolver un precio distinto al inicial', () => {
+    const room = {
+      name: "room",
+      rate: 150,
+      discount: 20,
+    };
     
+    const booking = new Booking(
+      "booking1",
+      "bok@bok.es",
+      "2023-10-16",
+      "2023-10-31",
+      10,
+      room
+    );
+
+    const fee = booking.getFee();
+    expect(fee).toBe(108);
+  });
+
+  test('fee test debe devolver el precio inicial al no tener ningún descuento', () => {
+    const room = {
+      name: "room",
+      rate: 150,
+      discount: 0,
+    };
+    
+    const booking = new Booking(
+      "booking1",
+      "bok@bok.es",
+      "2023-10-16",
+      "2023-10-31",
+      0,
+      room
+    );
+
+    const fee = booking.getFee();
+    expect(fee).toBe(150);
+  });
+
+  test('fee test debe devolver el precio solo con el descuento de la room', () => {
+    const room = {
+      name: "room",
+      rate: 150,
+      discount: 20,
+    };
+    
+    const booking = new Booking(
+      "booking1",
+      "bok@bok.es",
+      "2023-10-16",
+      "2023-10-31",
+      0,
+      room
+    );
+
+    const fee = booking.getFee();
+    expect(fee).toBe(120);
+  });
+
+  test('fee test debe devolver el precio solo con el descuento de la booking', () => {
+    const room = {
+      name: "room",
+      rate: 150,
+      discount: 0,
+    };
+    
+    const booking = new Booking(
+      "booking1",
+      "bok@bok.es",
+      "2023-10-16",
+      "2023-10-31",
+      50,
+      room
+    );
+
+    const fee = booking.getFee();
+    expect(fee).toBe(75);
+  });
+
+  test('fee test debe devolver el 0 si el descuento es del 100% en ambos casos o solo en uno', () => {
+    const room = {
+      name: "room",
+      rate: 150,
+      discount: 100,
+    };
+    
+    const booking = new Booking(
+      "booking1",
+      "bok@bok.es",
+      "2023-10-16",
+      "2023-10-31",
+      0,
+      room
+    );
+
+    const fee = booking.getFee();
+    expect(fee).toBe(0);
   });
 });
