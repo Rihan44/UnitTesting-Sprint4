@@ -113,15 +113,12 @@ class Booking {
   }
 
   getFee() {
-    let price = this.room.rate; 
-    let roomDiscount = this.room.discount;
-    let bookingDiscount = this.discount;
 
-    let priceDiscount = (price * roomDiscount ) / 100;
+    let priceDiscount = (this.room.rate * this.room.discount ) / 100;
 
     let priceWithRoomDiscount = price - priceDiscount;
 
-    let bookingPriceDiscount = (priceWithRoomDiscount * bookingDiscount) / 100;
+    let bookingPriceDiscount = (priceWithRoomDiscount * this.discount) / 100;
 
     let finalPrice = priceWithRoomDiscount - bookingPriceDiscount;
 
