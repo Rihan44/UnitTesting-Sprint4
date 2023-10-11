@@ -66,10 +66,6 @@ class Room {
 
   static totalOccupancyPercentage(rooms, startDate, endDate) {
 
-    if (!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room))) {
-      return 0;
-    }
-
     function countDays(startDate, endDate) {
       const oneDay = 24 * 60 * 60 * 1000;
       return Math.round(Math.abs((startDate - endDate) / oneDay)) + 1;

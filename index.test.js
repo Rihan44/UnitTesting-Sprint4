@@ -650,4 +650,5 @@ describe('Bookings tests', () => {
     const fee = booking.getFee();
     expect(fee).toBe(0);
   });
+
 });
