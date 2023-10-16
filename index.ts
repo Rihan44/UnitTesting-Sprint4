@@ -82,9 +82,9 @@ export class Room implements RoomInterface{
       return 0;
     }
 
-    function countDays(startDate: any, endDate: any) {
+    function countDays(startDate: Date, endDate: Date) {
       const oneDay = 24 * 60 * 60 * 1000;
-      return Math.round(Math.abs((startDate - endDate) / oneDay)) + 1;
+      return Math.round(Math.abs((startDate.getTime() - endDate.getTime()) / oneDay)) + 1;
     }
 
     let totalOccupiedDays = 0;
