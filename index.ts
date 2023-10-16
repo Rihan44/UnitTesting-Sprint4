@@ -1,32 +1,25 @@
 
 interface RoomInterface {
   name: string;
-  bookings: Booking[];
+  bookings: Booking[] | [];
   rate: number;
   discount: number;
 }
 
-interface RoomParams {
+class Room implements RoomInterface{
   name: string;
-  bookings: Booking[];
-  rate: number;
-  discount: number;
-}
-
-class Room implements RoomInterface {
-  name: string;
-  bookings: Booking[];
+  bookings: Booking[] | [];
   rate: number;
   discount: number;
 
-  constructor(name: string, bookings: Booking[], rate: number, discount: number) {
+  constructor(name: string, bookings: Booking[] | [], rate: number, discount: number) {
     this.name = name;
     this.bookings = bookings;
     this.rate = rate;
     this.discount = discount;
   }
 
-  isOccupied(date: Date) {
+  isOccupied(date: Date | string) {
     const myDate = new Date(date);
 
     for (let i = 0; i < this.bookings.length; i++) {
@@ -41,7 +34,7 @@ class Room implements RoomInterface {
     return false;
   }
 
-  occupancyPercentage(startingDate: Date, endingDate: Date) {
+  occupancyPercentage(startingDate: Date | string, endingDate: Date | string) {
     const startDate = new Date(startingDate);
     const endDate = new Date(endingDate);
 
@@ -83,7 +76,7 @@ class Room implements RoomInterface {
     return parseFloat(percentage.toFixed(1));
   }
 
-  static totalOccupancyPercentage(rooms: Room, startDate: Date, endDate: Date) {
+  static totalOccupancyPercentage(rooms: Room[], startDate: Date | string, endDate: Date | string) {
 
     if(!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room))) {
       return 0;
@@ -110,7 +103,7 @@ class Room implements RoomInterface {
     return parseFloat(percentage);
   }
 
-  static availableRooms(rooms: Room[], startDate: Date, endDate: Date) {
+  static availableRooms(rooms: Room[], startDate: Date | string, endDate: Date | string) {
 
     let availableRooms: Room[] = [];
 
@@ -125,16 +118,6 @@ class Room implements RoomInterface {
     return availableRooms;
   }
 }
-
-interface BookingInterface {
-  name: string,
-  email: string,
-  checkIn: Date | string,
-  checkOut: Date | string,
-  discount: number,
-  room: Room
-}
-
 
 class Booking {
   name: string;
