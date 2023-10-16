@@ -1,11 +1,11 @@
 "use strict";
-const { roomClass, bookingClass } = require('./index.ts');
+const { Room, Booking } = require('./index.ts');
 describe('Room Tests', () => {
     it('isOccupied is true cuando la habitacion esta ocupada en una fecha dada', () => {
         const room = new Room('room1', [], 150, 10);
         const booking1 = new Booking('booking1', 'prueba@gmail.com', '2023-10-01', '2023-10-06', 10, room);
         const booking2 = new Booking('booking2', 'prueba2@gmail.com', '2023-10-07', '2023-10-15', 10, room);
-        const room1 = new roomClass(room.name, [
+        const room1 = new Room(room.name, [
             booking1,
             booking2,
         ], room.rate, room.discount);
