@@ -6,7 +6,7 @@ interface RoomInterface {
   discount: number;
 }
 
-class Room implements RoomInterface{
+export class Room implements RoomInterface{
   name: string;
   bookings: Booking[] | [];
   rate: number;
@@ -119,7 +119,7 @@ class Room implements RoomInterface{
   }
 }
 
-class Booking {
+export class Booking {
   name: string;
   email: string;
   checkIn: Date | string;
@@ -151,8 +151,4 @@ class Booking {
   }
 }
 
-module.exports = {
-  Room,
-  Booking
-};
 
