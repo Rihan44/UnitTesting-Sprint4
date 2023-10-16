@@ -66,6 +66,10 @@ class Room {
 
   static totalOccupancyPercentage(rooms, startDate, endDate) {
 
+    if(!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room))) {
+      return 0;
+    }
+
     function countDays(startDate, endDate) {
       const oneDay = 24 * 60 * 60 * 1000;
       return Math.round(Math.abs((startDate - endDate) / oneDay)) + 1;
@@ -93,6 +97,7 @@ class Room {
 
     for(let room of rooms) {
       const ocuppied = room.isOccupied(startDate) || room.isOccupied(endDate);
+      
       if(!ocuppied) {
         availableRooms.push(room);
       }
@@ -116,7 +121,7 @@ class Booking {
 
     let priceDiscount = (this.room.rate * this.room.discount ) / 100;
 
-    let priceWithRoomDiscount = price - priceDiscount;
+    let priceWithRoomDiscount = this.room.rate - priceDiscount;
 
     let bookingPriceDiscount = (priceWithRoomDiscount * this.discount) / 100;
 
